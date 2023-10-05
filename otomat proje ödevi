@@ -1,0 +1,137 @@
+﻿// See https://aka.ms/new-console-template for more information
+
+
+
+int[] fiyatlar = { 7, 3, 2 };
+string[] ürünler = { "0-Kola", "1-Bisküvi", "2-Çikolata" };
+
+DON:
+
+Console.WriteLine("MÜŞTERİ GİRİŞİ İÇİN 1'E BASINIZ \nYETKİLİ GİRİŞİ İÇİN 2'E BASINIZ");
+string giris = Console.ReadLine();
+
+
+if (giris=="1")
+{
+    Console.WriteLine("       ÜRÜNLER       ");
+
+    foreach (string item in ürünler)
+    {
+        Console.WriteLine(item);
+    }
+
+DON2:
+
+    Console.WriteLine("Seçtiğiniz ürünün numarasını giriniz");
+    int secim = Convert.ToInt32(Console.ReadLine());
+
+    if(secim >= ürünler.Length)
+    {
+        Console.WriteLine("   DOĞRU ÜRÜN GİRİŞİ YAPINIZ   ");
+        goto DON2;
+    }
+
+    Console.WriteLine("Fiyat:" + fiyatlar[secim]);
+
+    Console.WriteLine("LÜTFEN ÖDEMEYİ YAPINIZ");
+    Console.WriteLine("Girilecek tutar:");
+    int para = Convert.ToInt32(Console.ReadLine());
+
+    int tutar = fiyatlar[secim];
+
+   if(para >= tutar)
+    {
+        para -= tutar;
+        Console.WriteLine("Ürününüzü alabilirsiniz \nPara üstü:" + para);
+
+    }
+   else
+    {
+        Console.WriteLine("Bakiye yetersiz \nParanız iade ediliyor ");
+       
+    }
+    goto DON;
+
+}
+
+else if(giris=="2")
+{
+DON3:
+    string sifre = "5353";
+    Console.WriteLine("LÜTFEN YETKİLİ ŞİFRENİZİ GİRİNİZ:");
+    string girsifre = Console.ReadLine();
+
+DON4:
+    if (girsifre==sifre)
+    {
+
+        Console.WriteLine("       ÜRÜNLER       ");
+
+        foreach (string item in ürünler)
+        {
+            Console.WriteLine(item);
+        }
+
+        Console.WriteLine("Ürün fiyatı güncellemek için 1'e basınız \nYeni ürün eklemek için 2'e basınız");
+        string secim2 = Console.ReadLine();
+
+        if(secim2 =="1")
+        {
+            Console.WriteLine("Fiyatını güncellemek istediğiniz ürünün numarasını giriniz");
+            int secim3 = Convert.ToInt32(Console.ReadLine());
+
+            if (secim3 < ürünler.Length)
+            {
+
+                Console.WriteLine("Yeni ürün fiyatını giriniz");
+                int yenifiyat = Convert.ToInt32(Console.ReadLine());
+
+                fiyatlar[secim3] = yenifiyat;
+            }
+
+            else
+            {
+                Console.WriteLine("Hatalı Giriş Yaptınız");
+                goto DON4;
+            }
+
+        }
+
+        else if(secim2 =="2")
+        {
+           
+            Console.WriteLine("Yeni eklemek istediğiniz  ürünü numarasıyla  giriniz");
+            string secim4 = Console.ReadLine();
+
+            Array.Resize(ref ürünler, ürünler.Length + 1);
+            ürünler[ürünler.Length - 1] = secim4;
+
+            Console.WriteLine("Yeni eklemek istediğiniz  ürünün fiyatını giriniz");
+            int secim5 = Convert.ToInt32(Console.ReadLine());
+           
+            Array.Resize(ref fiyatlar , fiyatlar.Length + 1);
+            fiyatlar[fiyatlar.Length - 1] = secim5 ;
+
+        }
+        else
+        {
+            Console.WriteLine("Hatalı Giriş Yaptınız");
+            goto DON4;
+        }
+    }
+    else
+    {
+        Console.WriteLine("HATALI GİRİŞ YAPTINIZ");
+        goto DON3;
+    }
+
+    goto DON;
+}
+
+else
+{
+    Console.WriteLine("HATALI GİRİŞ YAPTINIZ");
+    goto DON;
+}
+
+Console.ReadLine();
